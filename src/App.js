@@ -1,6 +1,7 @@
 import React from 'react';
 import StyleProvider from './Providers/ThemeProvider';
 import Routes from './Routes';
+import './App.css'
 
 function App() {
   return (

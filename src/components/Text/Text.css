@@ -1,0 +1,34 @@
+.text {
+  margin: 0;
+  padding: 0;
+  text-decoration: 0;
+  font-weight: normal;
+}
+
+.text--medium {
+  font-size: 20px;
+}
+
+.text--small {
+  font-size: 15px
+}
+
+.text--large {
+  font-size: 60px;
+}
+
+.primary {
+  color: #fff;
+}
+
+.secondary {
+  color: #242424;
+}
+
+.disabled {
+  color: #24242450;
+}
+
+.inherit {
+  color: inherit;
+}
