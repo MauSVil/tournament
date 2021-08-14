@@ -23,7 +23,7 @@ const Button = (props) => {
   return (
     <button
       onClick={onClick}
-      className={`button ${validateStyleClass} ${validateColorClass} ${validateSizesClass}`}
+      className={`btn ${validateStyleClass} ${validateColorClass} ${validateSizesClass}`}
     >
       {children}
     </button>

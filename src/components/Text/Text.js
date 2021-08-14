@@ -5,18 +5,18 @@ const SIZES = ['text--medium', 'text--small', 'text--large'];
 
 const COLORS = ['primary', 'secondary', 'disabled'];
 
-const variantValidation = (variant, children, validateColorClass, validateSizeClass) => {
+const variantValidation = (variant, children, validateColorClass, validateSizeClass, className) => {
   switch (variant) {
     case 'h1':
-      return <h1 className={`text ${validateColorClass} ${validateSizeClass}`}>{children}</h1>
+      return <h1 className={`text ${validateColorClass} ${validateSizeClass} ${className}`}>{children}</h1>
     case 'h2':
-      return <h2 className={`text ${validateColorClass} ${validateSizeClass}`}>{children}</h2>
+      return <h2 className={`text ${validateColorClass} ${validateSizeClass} ${className}`}>{children}</h2>
     case 'h3':
-      return <h3 className={`text ${validateColorClass} ${validateSizeClass}`}>{children}</h3>
+      return <h3 className={`text ${validateColorClass} ${validateSizeClass} ${className}`}>{children}</h3>
     case 'h4':
-      return <h4 className={`text ${validateColorClass} ${validateSizeClass}`}>{children}</h4>
+      return <h4 className={`text ${validateColorClass} ${validateSizeClass} ${className}`}>{children}</h4>
     default:
-      return <p className={`text ${validateColorClass} ${validateSizeClass}`}>{children}</p>
+      return <p className={`text ${validateColorClass} ${validateSizeClass} ${className}`}>{children}</p>
   }
 }
 
@@ -25,7 +25,8 @@ const Text = (props) => {
     variant,
     children,
     textColor,
-    textSize
+    textSize,
+    className
   } = props;
 
   const validateColorClass = COLORS.includes(textColor) ? textColor : 'inhereit'
@@ -35,7 +36,8 @@ const Text = (props) => {
     variant,
     children,
     validateColorClass,
-    validateSizeClass
+    validateSizeClass,
+    className
   );
 }
 

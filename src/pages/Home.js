@@ -9,11 +9,8 @@ const Home = (props) => {
   const { classes } = props
 
   return (
-    <div className={classes.root}>
+    <div>
       <HomeSection {...section1} />
-      <HomeSection {...section2} />
-      <HomeSection {...section3} />
-      <HomeSection {...section4} />
     </div>
   )
 }
