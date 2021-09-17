@@ -1,0 +1,29 @@
+.tournament-root {
+  border: 1px solid black;
+  height: 320px;
+  text-align: center;
+  box-shadow: 4px 6px 15px black;
+  position: relative
+}
+
+.tournament-root:hover {
+  transform: scale(1.1)
+}
+
+.tournament-image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  opacity: 0.3;
+}
+
+.tournament-name {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.tournament-button {
+  padding: 5px;
+}

@@ -1,0 +1,45 @@
+.homeSection-root {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px 60px
+}
+
+.homeSection-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-inverted {
+  flex-direction: row-reverse;
+}
+
+.background-dark {
+  background-color: #242424;
+}
+
+.homeSection-col {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 20px 100px;
+}
+
+.homeSection-titleContainer {
+  margin-bottom: 25px;
+}
+
+.homeSection-descContainer {
+  max-width: 60%;
+  margin-bottom: 20px;
+}
+
+.homeSection-img {
+  width: 300px;
+  height: 100%;
+  background: lightblue
+}

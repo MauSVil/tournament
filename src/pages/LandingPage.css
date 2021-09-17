@@ -1,0 +1,44 @@
+.landingPage-root {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #A2A6A7;
+  opacity: 1;
+  z-index: 4;
+}
+
+.landingPage-rootClosed {
+  width: 0vw;
+  opacity: 1;
+  transition: all 1.5s ease;
+  overflow: hidden;
+}
+
+.landingPage-logo {
+  height: 540px;
+  width: 345px;
+  object-fit: contain;
+  opacity: 1;
+}
+
+.landingPage-startButton {
+  width: 345px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  background: #30BCED;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.landingPage-opacityClosed {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
