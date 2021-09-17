@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux'
 import axios from 'axios';
 import './SignUp.css'
 import Text from '../components/Text/Text'
@@ -6,28 +7,29 @@ import Button from '../components/Button/Button'
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import _ from 'lodash';
+import { setResponse, setResponse as setResponseAction } from '../redux/actions/ui'
 
 import io from "socket.io-client";
 
 const socket = io('http://localhost:7000');
 
-const SignUp = () => {
+const SignUp = (props) => {
+  const {
+    setResponse
+  } = props;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const history = useHistory();
-
-  useEffect(() => {
-    socket.on('message2', messate => {
-      console.log(messate)
-    })
-  }, [])
 
   const handleSignIn = async () => {
     const { data } = await axios.post('http://localhost:7000/api/user/signin', {
       email,
       password,
     });
+
+    setResponse({ data: data.data, error: data.error, action: data.action })
 
     const token = _.get(data, 'data.token', '');
     const userExist = _.get(data, 'data.userExist', '');
@@ -41,10 +43,6 @@ const SignUp = () => {
       setEmail("");
       setPassword("");
     }
-  }
-
-  const handleSendNotification = async () => {
-    socket.emit('notification', { from: 'Mauricio', to: 'test2@test2.com', message: 'Hola'})
   }
 
   return (
@@ -73,10 +71,13 @@ const SignUp = () => {
           className="login-textField"
         />
         <Button styleClass="btn--outline" colorClass="primary" onClick={handleSignIn}>Log In</Button>
-        <Button styleClass="btn--outline" colorClass="primary" onClick={handleSendNotification}>Send Notification</Button>
       </div>
     </div>
   )
 };
 
-export default SignUp;
+const mapDispatchToProps = {
+  setResponse: setResponseAction
+}
+
+export default connect(null, mapDispatchToProps)(SignUp);

@@ -1,0 +1,75 @@
+.routes-draggableContainer {
+  position: absolute;
+  right: 0;
+  height: 100vh;
+  width: 50px;
+  /* background: #464F51; */
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.routes-draggableContainerOpen {
+  width: 300px;
+  background: #464F51;
+}
+
+.routes-dragItem {
+  height: 100px;
+  width: 5px;
+  left: 10px;
+  background: #707070;
+  position: relative;
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.routes-dragItemOpen {
+  background: #FFFAFF;
+}
+
+.routes-draggableContent {
+  display: none;
+}
+
+.routes-draggableContentOpen {
+  height: 80%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.routes-friendContainer {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.routes-friendAvatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: #FFFAFF;
+}
+
+.routes-friendDesc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.routes-friendName {
+  color: #FFFAFF;
+}
+
+.routes-friendDescr {
+  color: #FC5130;
+}

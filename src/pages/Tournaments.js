@@ -4,6 +4,7 @@ import Text from '../components/Text/Text';
 import Button from '../components/Button/Button';
 import axios from 'axios';
 import './Tournaments.css'
+import Tournament from '../components/Tournament/Tournament';
 
 const Tournaments = () => {
   const [tournaments, setTournaments] = useState([]);
@@ -19,15 +20,46 @@ const Tournaments = () => {
     getTournaments();
   }, [])
 
+  const tourns = [
+    {
+      name: 'Tournament 1',
+      cost: 100,
+      type: '1v1',
+      roleIn: 10,
+      expertise: 'rookie'
+    },
+    {
+      name: 'Tournament 2',
+      cost: 100,
+      type: '1v1',
+      roleIn: 10,
+      expertise: 'rookie'
+    },
+    {
+      name: 'Tournament 3',
+      cost: 100,
+      type: '1v1',
+      roleIn: 10,
+      expertise: 'rookie'
+    },
+    {
+      name: 'Tournament 4',
+      cost: 100,
+      type: '1v1',
+      roleIn: 10,
+      expertise: 'rookie'
+    }
+  ]
+
   return (
-    <div>
-      {tournaments.map((el) => {
-        return (
-          <div className="torunaments-tournament" onClick={() => history.push(`/tournament/${el._id}`)}>
-            <Text>{el.name}</Text>
-          </div>
-        )
-      })}
+    <div className="tournaments-root">
+      <div className="tournaments-container">
+        {tourns.map((el) => {
+          return (
+            <Tournament tournament={el} />
+          )
+        })}
+      </div>
     </div>
   )
 };

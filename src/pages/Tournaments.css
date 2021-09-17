@@ -1,3 +1,14 @@
+.tournaments-root {
+  width: 100%;
+}
+
+.tournaments-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px 50px;
+  padding: 110px 0px;
+}
+
 .torunaments-tournament {
   height: 300px;
   width: 250px;
