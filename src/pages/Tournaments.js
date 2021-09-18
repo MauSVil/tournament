@@ -12,8 +12,18 @@ const Tournaments = () => {
   const history = useHistory();
 
   const getTournaments = async () => {
-    const { data } = await axios.get('http://localhost:4000/api/tournaments')
-    setTournaments(data)
+    try {
+      const { data } = await axios.get('http://localhost:7000/api/tournaments',
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+      );
+      setTournaments(data)
+    } catch (error) {
+      history.push('/login')
+    }
   }
 
   useEffect(() => {
@@ -23,6 +33,7 @@ const Tournaments = () => {
   const tourns = [
     {
       name: 'Tournament 1',
+      id: 1,
       cost: 100,
       type: '1v1',
       roleIn: 10,
@@ -30,6 +41,7 @@ const Tournaments = () => {
     },
     {
       name: 'Tournament 2',
+      id: 2,
       cost: 100,
       type: '1v1',
       roleIn: 10,
@@ -37,6 +49,7 @@ const Tournaments = () => {
     },
     {
       name: 'Tournament 3',
+      id: 3,
       cost: 100,
       type: '1v1',
       roleIn: 10,
@@ -44,6 +57,7 @@ const Tournaments = () => {
     },
     {
       name: 'Tournament 4',
+      id: 4,
       cost: 100,
       type: '1v1',
       roleIn: 10,
@@ -51,12 +65,16 @@ const Tournaments = () => {
     }
   ]
 
+  const handleTournamentClick = (id) => {
+    history.push(`/tournament/${id}`)
+  }
+
   return (
     <div className="tournaments-root">
       <div className="tournaments-container">
         {tourns.map((el) => {
           return (
-            <Tournament tournament={el} />
+            <Tournament tournament={el} onClick={() => handleTournamentClick(el.id)}/>
           )
         })}
       </div>
