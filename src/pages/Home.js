@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { themed } from '../HOC/themed'
+import { connect } from 'react-redux'
 import { Bracket, RoundProps } from 'react-brackets';
-import HomeSection from '../components/HomeSection/HomeSection'
+import HomeSection from '../components/HomeSection/HomeSection';
+import axios from 'axios';
 import LandingPage from './LandingPage'
-import sections from '../data/HomeData'
+import sections from '../data/HomeData';
+import { setUserInfo as setUserInfoAction } from '../redux/actions/ui'
+import { useHistory } from 'react-router';
 
 const { section1 } = sections;
 
@@ -36,8 +40,30 @@ const rounds: RoundProps[] = [
 ];
 
 const Home = (props) => {
-  const { classes } = props;
+  const { setUserInfo } = props;
   const [open, setOpen] = useState(true)
+
+  const history = useHistory();
+
+  const fetchUserInfo = async () => {
+    try {
+      const { data: { data }} = await axios.get('http://localhost:7000/api/user',
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+      );
+      setUserInfo(data[0])
+    } catch (error) {
+      setUserInfo({})
+      history.push('/login')
+    }
+  }
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, [])
 
   return (
     <div>
@@ -48,4 +74,8 @@ const Home = (props) => {
   )
 }
 
-export default themed('pages.Home', Home);
+const mapDispatchToProps = {
+  setUserInfo: setUserInfoAction,
+}
+
+export default connect(null, mapDispatchToProps)(Home);

@@ -1,15 +1,19 @@
 import {
     SET_RESPONSE,
-    TOGGLE_FRIENDSMODALOPEN
+    TOGGLE_FRIENDSMODALOPEN,
+    SET_USER_LOGGEDIN,
+    SET_USER_INFO,
 } from "../actions/ui";
 
 const initialState = {
+    userLoggedIn: false,
     response: {
         data: null,
         error: null,
         action: null
     },
-    friendsModalOpen: false
+    friendsModalOpen: false,
+    userInfo: {}
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -29,6 +33,18 @@ const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 friendsModalOpen: !state.friendsModalOpen
+            }
+        }
+        case SET_USER_LOGGEDIN: {
+            return {
+                ...state,
+                userLoggedIn: payload,
+            }
+        }
+        case SET_USER_INFO: {
+            return {
+                ...state,
+                userInfo: payload,
             }
         }
         default:

@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect,
 } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -12,24 +13,27 @@ import Header from './components/Header/Header'
 import NotificationsModal from './components/NotificationsModal/NotificationsModal';
 import NotificationsComponent from './components/NotificationsComponent/NotificationsComponent';
 import Tournaments from './pages/Tournaments'
-import Tournament from './pages/Tournament';
+import TournamentPage from './pages/TournamentPage';
 import './Routes.css'
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import { setResponse as setResponseAction } from './redux/actions/ui';
+import {
+  setResponse as setResponseAction,
+  setUserLoggedIn as setUserLoggedInAction,
+} from './redux/actions/ui';
+import io from "socket.io-client";
+
+const socket = io('http://localhost:7000');
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const Routes = (props) => {
-  const { response, setResponse } = props;
-
-  const [token, setToken] = useState("")
-
-  useEffect(() => {
-    setToken(localStorage.getItem('token'));
-  }, [])
+  const {
+    response,
+    setResponse,
+  } = props;
 
   const handleClose = () => {
     setResponse({ data: null, error: null, action: null })
@@ -63,15 +67,9 @@ const Routes = (props) => {
               <Route path="/tournaments">
                 <Tournaments />
               </Route>
-              {/* <Route path="/tournament/:id">
-                <Tournament />
-              </Route>
-              <Route path="/signUp">
-                <SignUp />
-              </Route>
               <Route path="/login">
                 <Login />
-              </Route> */}
+              </Route>
             </Switch>
           </div>
           <NotificationsComponent />
@@ -84,12 +82,14 @@ const Routes = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    response: state.ui.response
+    response: state.ui.response,
+    userLoggedIn: state.ui.userLoggedIn,
   }
 }
 
 const mapDispatchToProps = {
-  setResponse: setResponseAction
+  setResponse: setResponseAction,
+  setUserLoggedIn: setUserLoggedInAction,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);

@@ -2,7 +2,7 @@ import React from 'react';
 import './Tournament.css'
 
 const Tournament = (props) => {
-  const { tournament } = props;
+  const { tournament, onClick } = props;
 
   const {
     name,
@@ -13,7 +13,7 @@ const Tournament = (props) => {
   } = tournament;
 
   return (
-    <div className="tournament-root">
+    <div className="tournament-root" onClick={onClick}>
       <p className="tournament-name">{name}</p>
       <p>{cost}</p>
       <p>{type}</p>

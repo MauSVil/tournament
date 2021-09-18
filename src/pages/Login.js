@@ -7,7 +7,7 @@ import Button from '../components/Button/Button'
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import _ from 'lodash';
-import { setResponse, setResponse as setResponseAction } from '../redux/actions/ui'
+import { setResponse as setResponseAction } from '../redux/actions/ui'
 
 import io from "socket.io-client";
 
