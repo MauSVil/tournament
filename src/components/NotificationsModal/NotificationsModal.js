@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import clsx from 'clsx';
+import _ from 'lodash';
 import './NotificationsModal.css'
 import { toggleFriendsModalOpen as toggleFriendsModalOpenAction } from '../../redux/actions/ui';
 
 const NotificationsModal = (props) => {
-  const { toggleFriendsModalOpen, friendsModalOpen } = props;
+  const { toggleFriendsModalOpen, friendsModalOpen, userInfo } = props;
 
   const [xAxisInitial, setXAxisInitial] = useState(0);
 
@@ -38,15 +39,9 @@ const NotificationsModal = (props) => {
     "routes-draggableContent", {
       "routes-draggableContentOpen": friendsModalOpen
     }
-  )
+  );
 
-  const friends = [
-    { name: 'Mauricio Sanchez Vilchis', descr: 'Friend 1' },
-    { name: 'Mauricio Sanchez Vilchis', descr: 'Friend 1' },
-    { name: 'Mauricio Sanchez Vilchis', descr: 'Friend 1' },
-    { name: 'Mauricio Sanchez Vilchis', descr: 'Friend 1' },
-    { name: 'Mauricio Sanchez Vilchis', descr: 'Friend 1' },
-  ];
+  const friends = _.get(userInfo, 'friends', []);
 
   return (
     <div className={draggableContainerClass}>
@@ -62,7 +57,7 @@ const NotificationsModal = (props) => {
             <div className="routes-friendAvatar" />
             <div className="routes-friendDesc">
               <p className="routes-friendName">{el.name}</p>
-              <p className="routes-friendDescr">{el.descr}</p>
+              <p className="routes-friendDescr">{el.email}</p>
             </div>
           </div>
         ))}
@@ -73,7 +68,8 @@ const NotificationsModal = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    friendsModalOpen: state.ui.friendsModalOpen
+    friendsModalOpen: state.ui.friendsModalOpen,
+    userInfo: state.ui.userInfo,
   }
 }
 

@@ -70,6 +70,9 @@ const Routes = (props) => {
               <Route path="/login">
                 <Login />
               </Route>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
             </Switch>
           </div>
           <NotificationsComponent />

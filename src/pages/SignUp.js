@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 import './SignUp.css'
 import Text from '../components/Text/Text'
 import Button from '../components/Button/Button'
@@ -11,6 +12,8 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [twitchAccount, setTwitchAccount] = useState("");
 
+  const history = useHistory();
+
   const handleSignUp = async () => {
     const user = await axios.post('http://localhost:7000/api/user/signup', {
       email,
@@ -19,7 +22,9 @@ const SignUp = () => {
       twitchAccount,
       role: "player"
     });
-    console.log(user)
+    if (user) {
+      await history.push('/login');
+    }
   }
 
   return (
