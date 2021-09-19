@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import Text from '../components/Text/Text';
-import Button from '../components/Button/Button';
 import axios from 'axios';
 import './Tournaments.css'
 import Tournament from '../components/Tournament/Tournament';
+import envVariables from '../utils';
 
 const Tournaments = () => {
   const [tournaments, setTournaments] = useState([]);
@@ -13,7 +12,7 @@ const Tournaments = () => {
 
   const getTournaments = async () => {
     try {
-      const { data } = await axios.get('http://localhost:7000/api/tournaments',
+      const { data } = await axios.get(`${envVariables.SERVERURL}/api/tournaments`,
         {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
