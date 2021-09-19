@@ -19,6 +19,8 @@ const SignUp = (props) => {
     setResponse
   } = props;
 
+  console.log(socket, 'socket')
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
