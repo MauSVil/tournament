@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux'
 import clsx from 'clsx';
 import _ from 'lodash';
 import './NotificationsModal.css'
 import { toggleFriendsModalOpen as toggleFriendsModalOpenAction } from '../../redux/actions/ui';
+import { SocketContext } from '../../Providers/SocketProvider';
 
 const NotificationsModal = (props) => {
   const { toggleFriendsModalOpen, friendsModalOpen, userInfo } = props;
+
+  const socket = useContext(SocketContext);
 
   const [xAxisInitial, setXAxisInitial] = useState(0);
 
@@ -43,6 +46,10 @@ const NotificationsModal = (props) => {
 
   const friends = _.get(userInfo, 'friends', []);
 
+  const handleFriendClick = (friend) => {
+    socket.emit('notification', { from: userInfo.email, to: friend.email, message: `Hello from ${userInfo.name}` })
+  };
+
   return (
     <div className={draggableContainerClass}>
       <div
@@ -53,7 +60,7 @@ const NotificationsModal = (props) => {
       />
       <div className={draggableContent}>
         {friends.map((el) => (
-          <div className="routes-friendContainer">
+          <div className="routes-friendContainer" onClick={() => handleFriendClick(el)}>
             <div className="routes-friendAvatar" />
             <div className="routes-friendDesc">
               <p className="routes-friendName">{el.name}</p>

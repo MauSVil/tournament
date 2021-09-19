@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios';
 import './SignUp.css'
@@ -8,16 +8,15 @@ import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import _ from 'lodash';
 import { setResponse as setResponseAction } from '../redux/actions/ui';
+import { SocketContext } from '../Providers/SocketProvider';
 import envVariables from '../utils';
-
-import io from "socket.io-client";
-
-const socket = io(`${envVariables.SERVERURL}`);
 
 const SignUp = (props) => {
   const {
     setResponse
   } = props;
+
+  const socket = useContext(SocketContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
