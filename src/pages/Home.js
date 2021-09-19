@@ -8,6 +8,10 @@ import LandingPage from './LandingPage'
 import sections from '../data/HomeData';
 import { setUserInfo as setUserInfoAction } from '../redux/actions/ui'
 import { useHistory } from 'react-router';
+import envJSON from '../env.variables.json';
+
+const node_env = process.env.NODE_ENV || 'development';
+const envVariables = envJSON[node_env];
 
 const { section1 } = sections;
 
@@ -47,7 +51,7 @@ const Home = (props) => {
 
   const fetchUserInfo = async () => {
     try {
-      const { data: { data }} = await axios.get('http://localhost:7000/api/user',
+      const { data: { data }} = await axios.get(`${envVariables.SERVERURL}/api/user`,
         {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
