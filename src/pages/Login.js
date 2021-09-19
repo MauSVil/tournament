@@ -7,11 +7,12 @@ import Button from '../components/Button/Button'
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import _ from 'lodash';
-import { setResponse as setResponseAction } from '../redux/actions/ui'
+import { setResponse as setResponseAction } from '../redux/actions/ui';
+import envVariables from '../utils';
 
 import io from "socket.io-client";
 
-const socket = io('http://localhost:7000');
+const socket = io(`${envVariables.SERVERURL}`);
 
 const SignUp = (props) => {
   const {
@@ -24,7 +25,7 @@ const SignUp = (props) => {
   const history = useHistory();
 
   const handleSignIn = async () => {
-    const { data } = await axios.post('http://localhost:7000/api/user/signin', {
+    const { data } = await axios.post(`${envVariables.SERVERURL}/api/user/signin`, {
       email,
       password,
     });
