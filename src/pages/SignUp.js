@@ -5,6 +5,7 @@ import './SignUp.css'
 import Text from '../components/Text/Text'
 import Button from '../components/Button/Button'
 import TextField from '@material-ui/core/TextField';
+import envVariables from '../utils';
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const SignUp = () => {
   const history = useHistory();
 
   const handleSignUp = async () => {
-    const user = await axios.post('http://localhost:7000/api/user/signup', {
+    const user = await axios.post(`${envVariables.SERVERURL}/api/user/signup`, {
       email,
       name,
       password,
