@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -21,9 +20,7 @@ import {
   setResponse as setResponseAction,
   setUserLoggedIn as setUserLoggedInAction,
 } from './redux/actions/ui';
-import io from "socket.io-client";
-
-const socket = io('http://localhost:7000');
+import { SocketContext } from './Providers/SocketProvider';
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -35,8 +32,22 @@ const Routes = (props) => {
     setResponse,
   } = props;
 
+  const socket = useContext(SocketContext);
+
+  const [notificationOpen, setNotificationOpen] = useState({});
+
+  useEffect(() => {
+    socket.on('notification', (data) => {
+      setNotificationOpen(data);
+    })
+  }, [])
+
   const handleClose = () => {
     setResponse({ data: null, error: null, action: null })
+  }
+
+  const handleNotificationClose = () => {
+    setNotificationOpen({})
   }
 
   return (
@@ -60,6 +71,14 @@ const Routes = (props) => {
                 {response.action}
               </Alert>
             </Snackbar>
+            <Snackbar
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              open={notificationOpen.from}
+              onClose={handleNotificationClose}
+              autoHideDuration={3000}
+              message={notificationOpen.message}
+              key={"bottomRight"}
+            />
             <Switch>
               <Route path="/" exact>
                 <Home />

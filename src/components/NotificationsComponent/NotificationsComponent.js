@@ -5,11 +5,12 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import PeopleIcon from '@material-ui/icons/People';
 import ChatIcon from '@material-ui/icons/Chat';
 import Badge from '@material-ui/core/Badge';
+import _ from 'lodash';
 import { toggleFriendsModalOpen as toggleFriendsModalOpenAction } from '../../redux/actions/ui';
 import './NotificationsComponent.css'
 
 const NotificationsComponent = (props) => {
-  const { friendsModalOpen, toggleFriendsModalOpen } = props;
+  const { friendsModalOpen, toggleFriendsModalOpen, userInfo } = props;
 
   const notificationRoot = clsx(
     "notifications-root", {
@@ -20,6 +21,7 @@ const NotificationsComponent = (props) => {
   const handleIconClick = () => {
     toggleFriendsModalOpen();
   }
+  const notifications = _.get(userInfo, 'notifications', [])
 
   return (
     <div className={notificationRoot}>
@@ -42,7 +44,7 @@ const NotificationsComponent = (props) => {
         onClick={handleIconClick}
       >
         <Badge
-          badgeContent={20}
+          badgeContent={notifications.length}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',
@@ -70,7 +72,8 @@ const NotificationsComponent = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  friendsModalOpen: state.ui.friendsModalOpen
+  friendsModalOpen: state.ui.friendsModalOpen,
+  userInfo: state.ui.userInfo,
 })
 
 const mapDispatchToProps = {
