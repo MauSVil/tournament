@@ -8,10 +8,7 @@ import LandingPage from './LandingPage'
 import sections from '../data/HomeData';
 import { setUserInfo as setUserInfoAction } from '../redux/actions/ui'
 import { useHistory } from 'react-router';
-import envJSON from '../env.variables.json';
-
-const node_env = process.env.NODE_ENV || 'development';
-const envVariables = envJSON[node_env];
+import envVariables from '../utils';
 
 const { section1 } = sections;
 
