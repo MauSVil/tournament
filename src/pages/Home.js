@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { themed } from '../HOC/themed'
 import { connect } from 'react-redux'
 import { Bracket, RoundProps } from 'react-brackets';
 import HomeSection from '../components/HomeSection/HomeSection';
