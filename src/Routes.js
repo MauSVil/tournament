@@ -36,10 +36,19 @@ const Routes = (props) => {
 
   const [notificationOpen, setNotificationOpen] = useState({});
 
+  const token = localStorage.getItem('token');
+  const userExist = localStorage.getItem('userData');
+
   useEffect(() => {
     socket.on('notification', (data) => {
       setNotificationOpen(data);
     })
+  }, [])
+
+  useEffect(() => {
+    if (token) {
+      socket.emit('userLoggedIn', JSON.parse(userExist))
+    }
   }, [])
 
   const handleClose = () => {
