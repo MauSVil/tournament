@@ -19,6 +19,7 @@ import Login from './pages/Login';
 import {
   setResponse as setResponseAction,
   setUserLoggedIn as setUserLoggedInAction,
+  setUserNotifications as setUserNotificationsAction,
 } from './redux/actions/ui';
 import { SocketContext } from './Providers/SocketProvider';
 
@@ -30,6 +31,7 @@ const Routes = (props) => {
   const {
     response,
     setResponse,
+    setUserNotifications,
   } = props;
 
   const socket = useContext(SocketContext);
@@ -42,6 +44,7 @@ const Routes = (props) => {
   useEffect(() => {
     socket.on('notification', (data) => {
       setNotificationOpen(data);
+      setUserNotifications(data)
     })
   }, [])
 
@@ -121,6 +124,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setResponse: setResponseAction,
   setUserLoggedIn: setUserLoggedInAction,
+  setUserNotifications: setUserNotificationsAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);

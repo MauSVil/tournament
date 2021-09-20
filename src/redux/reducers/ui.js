@@ -3,6 +3,7 @@ import {
     TOGGLE_FRIENDSMODALOPEN,
     SET_USER_LOGGEDIN,
     SET_USER_INFO,
+    SET_USER_NOTIFICATIONS,
 } from "../actions/ui";
 
 const initialState = {
@@ -45,6 +46,18 @@ const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 userInfo: payload,
+            }
+        }
+        case SET_USER_NOTIFICATIONS: {
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    notifications: [
+                        ...state.userInfo.notifications,
+                        payload,
+                    ]
+                }
             }
         }
         default:

@@ -2,6 +2,7 @@ export const SET_RESPONSE = 'SET_RESPONSE';
 export const TOGGLE_FRIENDSMODALOPEN = 'TOGGLE_FRIENDSMODALOPEN';
 export const SET_USER_LOGGEDIN = 'SET_USER_LOGGEDIN';
 export const SET_USER_INFO = 'SET_USER_INFO';
+export const SET_USER_NOTIFICATIONS = 'SET_USER_NOTIFICATIONS';
 
 export const setResponse = (response) => {
     return {
@@ -26,6 +27,13 @@ export const setUserLoggedIn = (value) => {
 export const setUserInfo = (value) => {
     return {
         type: SET_USER_INFO,
+        payload: value,
+    }
+}
+
+export const setUserNotifications = (value) => {
+    return {
+        type: SET_USER_NOTIFICATIONS,
         payload: value,
     }
 }
